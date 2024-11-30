@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DB Flask Interface</title>
+</head>
+<body>
+    <h1>DB Flask Interface</h1>
+
+    <h2>Set Key</h2>
+    <form action="/set" method="POST">
+        <label for="key">Key:</label>
+        <input type="text" name="key" id="key" required><br>
+        <label for="value">Value:</label>
+        <input type="text" name="value" id="value" required><br>
+        <input type="submit" value="Add Value">
+    </form>
+
+    <h2>Get Key</h2>
+    <form action="/get" method="POST">
+        <label for="key">Key:</label>
+        <input type="text" name="key" id="key" required><br>
+        <input type="submit" value="Get Values">
+    </form>
+
+    {% if key %}
+    <h3>Key: {{ key }}</h3>
+    <h3>Values:</h3>
+    <ul>
+        {% for value in values %}
+        <li>{{ value }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if error %}
+    <p style="color: red;">Error: {{ error }}</p>
+    {% endif %}
+
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+
+    <h2>Remove Value from Key</h2>
+    <form action="/remove" method="POST">
+        <label for="key">Key:</label>
+        <input type="text" name="key" id="key" required><br>
+        <label for="value">Value:</label>
+        <input type="text" name="value" id="value" required><br>
+        <input type="submit" value="Remove Value">
+    </form>
+
+    <h2>Database Keys</h2>
+    <form action="/keys" method="GET">
+        <input type="submit" value="Show Keys">
+    </form>
+
+    {% if keys %}
+    <ul>
+        {% for key in keys %}
+        <li>{{ key }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h2>Database Values</h2>
+    <form action="/values" method="GET">
+        <input type="submit" value="Show Values">
+    </form>
+
+    {% if values %}
+    <ul>
+        {% for value in values %}
+        <li>{{ value }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
